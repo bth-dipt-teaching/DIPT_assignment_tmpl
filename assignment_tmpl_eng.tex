@@ -3,13 +3,13 @@
 %
 \documentclass[12pt,a4paper]{article}
 %
-% Set a flag to include or exclude the blue comment boxes
+% Set a flag to include or exclude the blue comment boxes.
 \usepackage{etoolbox}
 \newtoggle{todos}
 \toggletrue{todos}
 %\togglefalse{todos}
 %
-\include{preamble}
+\include{preamble}  % Contains commands that we pushed to a separate file.
 
 % Please identify COURSE CODE and COURSE NAME.
 \newcommand{\theCourse}{PA1234: Course name}
@@ -79,6 +79,8 @@ Supervisor(s) & Supervisor name(s), if applicable \\
 \end{small}
 \todo[inline]{In the table above, you should briefly describe the revision history of your submission.}
 
+\setcounter{table}{0}  % The tables on the front page shouldn't be counted
+
 % When you need a table of contents, you can uncomment the following line(s)
 % \setcounter{tocdepth}{2}  % Sets the level of sections/subsections for the table of contents
 % \tableofcontents
@@ -128,7 +130,7 @@ Note that named paragraphs are not numbered.
 In your assignments, you can use tables, figures and references. The entries in the reference list should be sorted alphabetically. Examples of tables and figures are shown below. Their numbering is automatic. Please note that table captions are on top of the tables, whereas figure captions are below the figures.
 Please do also note that figures and tables are placed automatically and do not always end up where intended.
 
-\begin{table}[hbt]
+\begin{table}[bth]
 \centering
 \caption{An example of a table.}
 \label{tab:ex}
@@ -148,16 +150,16 @@ Etc. & & \\
 \end{table}
 
 Creating tables and figures can be difficult, since \LaTeX\ is no ``what you see is what you get'' environment. For simple tables, you can use generators, like the one on  \url{https://www.tablesgenerator.com} for help. For figures, it is easiest to provide them in separate files and import them using \LaTeX's \texttt{\textbackslash includegraphics} command. The included files can have various formats, like, for example, JPG or PDF.
-Using command \texttt{\textbackslash ref}, you can insert cross-references to other places in your document, for example sections (e.g., Section \ref{sec:intro}), tables (e.g., Table \ref{tab:ex}) and figures (e.g., Figure \ref{fig:uml} or \ref{fig:bth}). You can only reference places that have a corresponding \texttt{\textbackslash ref} command in the \LaTeX\ code. For references to literature (citations), there is a special command (\texttt{\textbackslash cite}). You can find examples for that in the next section.
+Using command \texttt{\textbackslash ref}, you can insert cross-references to other places in your document, for example sections (e.g., Section \ref{sec:intro}), tables (e.g., Table \ref{tab:ex}), figures (e.g., Figure \ref{fig:bth}), listings (e.g., Listing \ref{lst:add})), equations (e.g., Equation \ref{eq:fx}), etc. Note that you can only reference places that have a corresponding \texttt{\textbackslash ref} command in the \LaTeX\ code. This command you need to place there manually. For references to literature (citations), there is a special command (\texttt{\textbackslash cite}). You can find examples for that in the next section.
 
-\begin{figure}[h!bt]
+\begin{figure}[bth]
 \centering
 \includegraphics[width=0.6\columnwidth]{example-graph}
 \caption{An example graph.}
 \label{fig:uml}
 \end{figure}
 
-\begin{figure}[h!bt]
+\begin{figure}[bth]
 \centering
 \includegraphics[width=0.6\columnwidth]{example-fig}
 \caption{An example figure.}
@@ -169,15 +171,20 @@ Using command \texttt{\textbackslash ref}, you can insert cross-references to ot
 \label{sec:code}
 Source code can be printed nicely using the \texttt{lstlisting}-environment, as in the example below. There are many parameters for the listings and code can also be loaded from a file. Please check the documentation of package \texttt{listings} for details.
 
-\begin{lstlisting}[frame=single,language=Python]
+\noindent
+\begin{minipage}{\textwidth}
+\begin{lstlisting}[frame=single,language=Python,basicstyle=\small,caption={Example of a code-listing.},label={lst:hello}]
 # Python3 example for printing a constant string 
 print("Hello World!"!)
 \end{lstlisting}
+\end{minipage}
 
-Equations can be typeset and numbered using the \texttt{equation}-environment, as in equation \ref{eq:ex} below.
+\lstinputlisting[frame=single,language=Python,basicstyle=\small,caption={Another example of a code-listing.},label={lst:add}]{exampleCode.py}
+
+Equations can be typeset and numbered using the \texttt{equation}-environment, as in equation \ref{eq:fx} below.
 
 \begin{equation}
-\label{eq:ex}
+\label{eq:fx}
     f(x) = (\frac{1}{\sqrt{x}})^2
 \end{equation}
 
@@ -189,7 +196,7 @@ For more details on report writing, please refer to \textit{Rapportskrivning fö
 % All references are stored in a separate bib-file: ass-refs.bib
 %\clearpage
 \small
-\bibliography{ass-refs}
 \bibliographystyle{plain}
+\bibliography{ass-refs}
 
 \end{document}
